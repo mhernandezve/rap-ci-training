@@ -1,4 +1,7 @@
-name: Python Pipeline 
+# CI Pipeline
+
+```
+name: RAP test pipeline
 
 on:
   push:
@@ -7,34 +10,27 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8]
     steps:
-
-    # First Step Setup Python Environment
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.8
 
-    # Second step Install dependencies
-    - name: Install dependencies
-      run: |
+    - name: Install Dependencies
+      run: | 
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    # Third step Run Linter
     - name: Lint with flake8
-      run: |
+      run: | 
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     
-    # Fift step run tests
-    - name: Test with pytest
+    - name: Run tests
       run: |
         pytest
+
+```
