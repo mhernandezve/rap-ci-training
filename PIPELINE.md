@@ -2,7 +2,7 @@ name: Python Pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
