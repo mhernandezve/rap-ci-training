@@ -1,4 +1,4 @@
-# fastapi_starter
+# rap-ci-training
 
 ## How to test
 
